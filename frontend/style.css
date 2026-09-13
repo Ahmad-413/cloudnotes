@@ -1,141 +1,287 @@
+:root {
+  --paper: #f3f4f6;
+  --surface: #ffffff;
+  --ink: #14171f;
+  --muted: #5b6170;
+  --border: #dde1e6;
+  --navy: #1f3a4d;
+  --navy-dark: #16293689;
+  --accent: #1f3a4d;
+  --accent-hover: #16293b;
+  --danger: #b3261e;
+  --ok: #2f7d5e;
+  --radius: 4px;
+}
+ 
 * {
   box-sizing: border-box;
 }
-
+ 
+html, body {
+  margin: 0;
+  padding: 0;
+}
+ 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: #f5f6f8;
-  color: #1a1a1a;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.5;
 }
-
-.container {
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 32px 20px 80px;
-}
-
-header {
-  text-align: center;
-  margin-bottom: 28px;
-}
-
-header h1 {
-  margin: 0 0 4px;
-  font-size: 28px;
-}
-
-.subtitle {
-  margin: 0;
-  color: #666;
-  font-size: 14px;
-}
-
-.note-form {
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+ 
+/* --- Toolbar --- */
+.toolbar {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--navy);
+  color: #eef1f4;
+  padding: 14px 28px;
+}
+ 
+.toolbar-brand {
+  display: flex;
+  align-items: baseline;
   gap: 10px;
-  margin-bottom: 28px;
 }
-
-.note-form input[type="text"],
-.note-form textarea {
-  padding: 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 14px;
-  font-family: inherit;
-  resize: vertical;
-}
-
-.note-form input[type="file"] {
-  font-size: 13px;
-}
-
-.note-form button {
-  padding: 10px 16px;
-  background: #2563eb;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
+ 
+.toolbar-title {
   font-weight: 600;
-  cursor: pointer;
-  transition: background 0.15s;
+  font-size: 16px;
+  letter-spacing: 0.01em;
 }
-
-.note-form button:hover {
-  background: #1d4ed8;
-}
-
-.note-form button:disabled {
-  background: #9ca3af;
-  cursor: not-allowed;
-}
-
-.error {
-  color: #dc2626;
+ 
+.toolbar-sub {
   font-size: 13px;
-  margin: 0;
-  min-height: 16px;
+  color: #a9b6c0;
 }
-
-.notes-list {
+ 
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  color: #c3ccd3;
+}
+ 
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #8f9aa3;
+  flex-shrink: 0;
+}
+ 
+.status-dot.online {
+  background: #4ade80;
+}
+ 
+.status-dot.offline {
+  background: #f87171;
+}
+ 
+/* --- Layout --- */
+.layout {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 24px 80px;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+ 
+@media (max-width: 720px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+ 
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+ 
+.panel-heading {
+  margin: 0 0 16px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: none;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+ 
+/* --- Composer / form --- */
+.composer form {
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
-
-.note-card {
-  background: white;
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+ 
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
-
-.note-card h3 {
-  margin: 0 0 6px;
-  font-size: 17px;
+ 
+.field-label {
+  font-size: 12px;
+  color: var(--muted);
 }
-
-.note-card p {
-  margin: 0 0 10px;
+ 
+.field input[type="text"],
+.field textarea {
+  font-family: inherit;
   font-size: 14px;
-  color: #444;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 9px 10px;
+  resize: vertical;
+}
+ 
+.field input[type="text"]:focus,
+.field textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+ 
+.file-field input[type="file"] {
+  font-size: 13px;
+  color: var(--muted);
+}
+ 
+button[type="submit"] {
+  margin-top: 4px;
+  padding: 10px 16px;
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+ 
+button[type="submit"]:hover {
+  background: var(--accent-hover);
+}
+ 
+button[type="submit"]:disabled {
+  background: #9aa4ac;
+  cursor: not-allowed;
+}
+ 
+.error {
+  margin: 0;
+  min-height: 16px;
+  font-size: 13px;
+  color: var(--danger);
+}
+ 
+/* --- Archive / notes list --- */
+.archive-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+ 
+.archive-header .panel-heading {
+  margin: 0;
+}
+ 
+.archive-count {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2px 8px;
+}
+ 
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+ 
+@media (max-width: 560px) {
+  .notes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+ 
+.note-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+ 
+.note-card img {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  display: block;
+}
+ 
+.note-card h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+ 
+.note-card p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
   white-space: pre-wrap;
 }
-
-.note-card img {
-  max-width: 100%;
-  border-radius: 8px;
-  display: block;
-  margin-bottom: 10px;
-}
-
+ 
 .note-meta {
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  font-size: 12px;
-  color: #888;
+  justify-content: space-between;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  color: var(--muted);
 }
-
+ 
 .delete-btn {
   background: none;
   border: none;
-  color: #dc2626;
+  color: var(--danger);
+  font-family: inherit;
+  font-size: 11px;
   cursor: pointer;
-  font-size: 12px;
-  font-weight: 600;
+  padding: 0;
 }
-
-.loading,
-.empty {
-  text-align: center;
-  color: #888;
-  font-size: 14px;
+ 
+.delete-btn:hover {
+  text-decoration: underline;
 }
+ 
+.system-message {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 24px 0;
+  text-align: left;
+  font-size: 13px;
+  color: var(--muted);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding-left: 14px;
+}
+ 

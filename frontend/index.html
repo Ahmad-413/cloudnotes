@@ -4,28 +4,58 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CloudNotes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>CloudNotes</h1>
-      <p class="subtitle">Notes with image attachments, running on AWS</p>
-    </header>
-
-    <form id="note-form" class="note-form">
-      <input type="text" id="title" name="title" placeholder="Note title" required />
-      <textarea id="body" name="body" placeholder="Write something..." rows="3"></textarea>
-      <input type="file" id="image" name="image" accept="image/*" />
-      <button type="submit">Add Note</button>
-      <p id="form-error" class="error"></p>
-    </form>
-
-    <div id="notes-list" class="notes-list">
-      <p class="loading">Loading notes...</p>
+  <div class="toolbar">
+    <div class="toolbar-brand">
+      <span class="toolbar-title">CloudNotes</span>
+      <span class="toolbar-sub">notes &amp; attachments</span>
+    </div>
+    <div class="status" id="status">
+      <span class="status-dot" id="status-dot"></span>
+      <span id="status-text">Checking connection</span>
     </div>
   </div>
-
+ 
+  <main class="layout">
+    <section class="panel composer">
+      <h2 class="panel-heading">New note</h2>
+      <form id="note-form">
+        <label class="field">
+          <span class="field-label">Title</span>
+          <input type="text" id="title" name="title" placeholder="Deployment checklist" required />
+        </label>
+ 
+        <label class="field">
+          <span class="field-label">Details</span>
+          <textarea id="body" name="body" rows="4" placeholder="Add context, steps, or notes"></textarea>
+        </label>
+ 
+        <label class="field file-field">
+          <span class="field-label">Attachment</span>
+          <input type="file" id="image" name="image" accept="image/*" />
+        </label>
+ 
+        <button type="submit" id="submit-btn">Add note</button>
+        <p id="form-error" class="error" role="alert"></p>
+      </form>
+    </section>
+ 
+    <section class="panel archive">
+      <div class="archive-header">
+        <h2 class="panel-heading">Notes</h2>
+        <span class="archive-count" id="archive-count">0</span>
+      </div>
+      <div id="notes-list" class="notes-grid">
+        <p class="system-message">Loading notes&hellip;</p>
+      </div>
+    </section>
+  </main>
+ 
   <script src="app.js"></script>
 </body>
 </html>
