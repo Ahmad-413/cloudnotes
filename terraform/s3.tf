@@ -57,6 +57,10 @@ resource "aws_s3_bucket_lifecycle_configuration" "uploads" {
     id     = "expire-old-test-uploads"
     status = "Disabled" # flip to "Enabled" if you want automatic cleanup of old images
 
+    filter {
+      prefix = "notes/"
+    }
+
     expiration {
       days = 90
     }

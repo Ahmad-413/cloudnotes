@@ -30,7 +30,7 @@ resource "aws_db_instance" "main" {
   vpc_security_group_ids = [aws_security_group.db.id]
   publicly_accessible    = false
 
-  backup_retention_period = 3
+  backup_retention_period = 1 # AWS free tier caps this at 1 day
   skip_final_snapshot     = true
   deletion_protection     = false # flip to true once this is a real production DB
 
