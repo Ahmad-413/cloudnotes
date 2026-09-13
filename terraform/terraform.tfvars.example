@@ -1,0 +1,15 @@
+# Copy this file to terraform.tfvars and fill in your own values.
+# terraform.tfvars is gitignored — never commit real secrets or account-specific values.
+
+aws_region       = "us-east-1"
+project_name     = "cloudnotes"
+environment      = "dev"
+
+key_pair_name    = "your-ec2-key-pair-name"     # must already exist in your AWS account
+github_repo_url  = "https://github.com/yourname/cloudnotes.git"
+
+# Restrict this to your own IP for safety, e.g. "203.0.113.4/32"
+ssh_allowed_cidr = "0.0.0.0/0"
+
+instance_type      = "t3.micro"
+db_instance_class  = "db.t3.micro"

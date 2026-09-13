@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CloudNotes</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📝 CloudNotes</h1>
+      <p class="subtitle">Notes with image attachments, running on AWS</p>
+    </header>
+
+    <form id="note-form" class="note-form">
+      <input type="text" id="title" name="title" placeholder="Note title" required />
+      <textarea id="body" name="body" placeholder="Write something..." rows="3"></textarea>
+      <input type="file" id="image" name="image" accept="image/*" />
+      <button type="submit">Add Note</button>
+      <p id="form-error" class="error"></p>
+    </form>
+
+    <div id="notes-list" class="notes-list">
+      <p class="loading">Loading notes...</p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
